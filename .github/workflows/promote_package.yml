@@ -30,7 +30,9 @@ jobs:
           oidc-service-slug: ${{ env.CLOUDSMITH_SERVICE_SLUG }}
 
       - name: Debug Webhook Payload
-        run: echo 'Webhook Payload: ${{ toJson(github.event.client_payload) }}'
+        run: |
+          echo "Webhook Payload:"
+          echo '${{ toJson(github.event.client_payload) }}' | jq .
 
       - name: Extract package version from webhook
         run: |
