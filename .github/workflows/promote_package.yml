@@ -29,11 +29,6 @@ jobs:
           oidc-namespace: ${{ env.CLOUDSMITH_NAMESPACE }}
           oidc-service-slug: ${{ env.CLOUDSMITH_SERVICE_SLUG }}
 
-      - name: Debug Webhook Payload
-        run: |
-          echo "Webhook Payload:"
-          echo '${{ toJson(github.event.client_payload) }}' | jq .
-
       - name: Extract package version from webhook
         run: |
           PACKAGE_VERSION="${{ github.event.client_payload.package_version }}"
@@ -43,6 +38,11 @@ jobs:
           fi
           echo "Package version received: $PACKAGE_VERSION"
           echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
+
+      - name: Debug Webhook Payload
+        run: |
+          echo "Webhook Payload:"
+          echo '${{ toJson(github.event.client_payload) }}' | jq .
 
       - name: Tag Package as Ready for Production
         run: |
