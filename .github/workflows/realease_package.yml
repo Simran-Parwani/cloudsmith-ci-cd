@@ -32,7 +32,10 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ github.event.workflow_run.id }}
 
-
+      - name: Install Cloudsmith CLI
+        run: |
+          pip install --upgrade cloudsmith-cli
+        shell: bash
 
       - name: List directory contents
         run: ls -la dist/
