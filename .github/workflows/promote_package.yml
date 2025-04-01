@@ -47,7 +47,7 @@ jobs:
       - name: Tag Package as Ready for Production
         run: |
           echo "Tagging package as ready-for-production..."
-          cloudsmith pkg update ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/${PACKAGE_NAME}-${PACKAGE_VERSION} --tags ready-for-production
+          cloudsmith packages update ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/${PACKAGE_NAME}-${PACKAGE_VERSION} --tags ready-for-production
 
       - name: Get Package Identifier and Promote
         run: |
