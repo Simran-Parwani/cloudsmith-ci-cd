@@ -53,10 +53,10 @@ jobs:
 
       - name: Get Package Identifier and Promote
         run: |
-          PACKAGE_QUERY="tags:ready-for-production filename:${PACKAGE_NAME}-${PACKAGE_VERSION}.tar.gz"
+          PACKAGE_QUERY="tag:ready-for-production" 
           echo "Searching for package with query: $PACKAGE_QUERY"
           
-          PACKAGE_DATA=$(cloudsmith list package ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }} -q "$PACKAGE_QUERY" -F json)
+          PACKAGE_DATA=$(cloudsmith list packages ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }} -q "$PACKAGE_QUERY" -F json)
           
           IDENTIFIER=$(echo "$PACKAGE_DATA" | jq -r '.data[] | .identifier_perm')
 
