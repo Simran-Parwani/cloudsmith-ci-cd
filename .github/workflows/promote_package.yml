@@ -39,7 +39,7 @@ jobs:
           echo "Package version received: $PACKAGE_VERSION"
           echo "PACKAGE_VERSION=$PACKAGE_VERSION" >> $GITHUB_ENV
 
-      - name: Debug Webhook Payload2
+      - name: Debug Webhook Payload3
         run: |
           echo "Webhook Payload:"
           echo '${{ toJson(github.event.client_payload) }}' | jq .
