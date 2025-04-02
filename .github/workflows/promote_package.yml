@@ -11,6 +11,7 @@ env:
   CLOUDSMITH_PRODUCTION_REPO: 'production'
   CLOUDSMITH_SERVICE_SLUG: ${{ vars.CLOUDSMITH_SERVICE_SLUG }}
   PACKAGE_NAME: 'example_package'
+  PACKAGE_SLUG: ${{github.event.client_payload.package_slug}}
 
 permissions:
   contents: read
@@ -47,7 +48,8 @@ jobs:
       - name: Tag Package as Ready for Production
         run: |
           echo "Tagging package as ready-for-production..."
-          cloudsmith packages update ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/${PACKAGE_NAME}-${PACKAGE_VERSION} --tags ready-for-production
+          cloudsmith tags add ${{ env.CLOUDSMITH_NAMESPACE }}/${{ env.CLOUDSMITH_STAGING_REPO }}/${{env.PACKAGE_SLUG}} ready-for-production
+          
 
       - name: Get Package Identifier and Promote
         run: |
